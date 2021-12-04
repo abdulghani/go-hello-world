@@ -3,26 +3,48 @@
 # https://gqlgen.com/getting-started/
 
 type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+    id: ID!
+    text: String!
+    done: Boolean!
+    user: User!
 }
 
 type User {
-  id: ID!
-  name: String!
-}
-
-type Query {
-  todos: [Todo!]!
+    id: ID!
+    name: String!
 }
 
 input NewTodo {
-  text: String!
-  userId: String!
+    text: String!
+    userId: String!
+}
+
+scalar Upload
+
+type File {
+    id: Int!
+    name: String!
+    content: String!
+    contentType: String!
+}
+
+input UploadFile {
+    id: Int!
+    file: Upload!
+}
+
+type Query {
+    hello: String!
+    empty: String!
+    todos: [Todo!]!
 }
 
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+    createTodo(input: NewTodo!): Todo!
+    singleUpload(file: Upload!): File!
+    singleUploadWithPayload(req: UploadFile!): File!
+    multipleUpload(files: [Upload!]!): [File!]!
+    multipleUploadWithPayload(req: [UploadFile!]!): [File!]!
 }
+
+

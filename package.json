@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepare": "npm run env:copy",
+    "prepare": "npm run vscode:settings && npm run env:copy && npm run graphql:generate",
     "postinstall": "go mod download",
-    "build": "rm -rf ./build; go build -o ./build/main ./src/main.go",
+    "build": "rm -rf ./build; npm run graphql:generate && go build -o ./build/main ./src/main.go",
     "build:docker": "npm run docker:build",
     "docker:build": "docker build . -f ./dockerfile -t test/go_hello_world",
     "docker:save": "docker save -o ./docker_image.tar test/go_hello_world",
@@ -15,7 +15,9 @@
     "start": "air",
     "start:prod": "./build/main",
     "start:compose": "docker-compose -f ./docker-compose.yml up -d --force-recreate --build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "graphql:generate": "go generate ./src/...",
+    "vscode:settings": "[ ! -f ./.vscode/settings.json ] && cp ./.vscode/settings.example.json ./.vscode/settings.json"
   },
   "keywords": [],
   "author": "",

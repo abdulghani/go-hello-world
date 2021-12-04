@@ -4,3 +4,4 @@
 /docker_image.tar
 /node_modules
 /.env
+/.vscode/settings.json
