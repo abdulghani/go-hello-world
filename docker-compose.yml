@@ -4,7 +4,7 @@ services:
   server:
     image: test/go_hello_world
     ports:
-      - 4000:8080
+      - 4000:3000
 
   # server_build:
   #     build:

@@ -14,5 +14,5 @@ RUN go build -o ./build/main ./src/main.go
 RUN rm -rf ./src
 
 # Expose port and entrypoint
-EXPOSE 8080
+EXPOSE 3000
 CMD [ "./build/main" ]
