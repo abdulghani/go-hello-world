@@ -10,7 +10,7 @@
     "docker:build": "docker build . -f ./dockerfile -t test/go_hello_world",
     "docker:save": "docker save -o ./docker_image.tar test/go_hello_world",
     "docker:scan": "docker scan test/go_hello_world",
-    "start": "go run ./src/main.go",
+    "start": "air",
     "start:prod": "./build/main",
     "start:compose": "docker-compose -f ./docker-compose.yml up -d --force-recreate --build",
     "test": "echo \"Error: no test specified\" && exit 1"

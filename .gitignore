@@ -1,3 +1,5 @@
 /build
+/tmp
 /bin
 /docker_image.tar
+/node_modules
