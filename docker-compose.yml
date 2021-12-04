@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  server:
+    image: test/go_hello_world
+    ports:
+      - 4000:8080
+
+  # server_build:
+  #     build:
+  #       context: .
+  #       dockerfile: ./dockerfile
+  #     ports:
+  #       - 3000:8080
