@@ -11,7 +11,7 @@ import (
 
 const UPLOAD_PREFIX string = "APP_UPLOAD#"
 
-func UploadFile(file io.Reader, contentType string) *s3manager.UploadOutput {
+func UploadFile(file io.Reader) *s3manager.UploadOutput {
 	session := ConnectAWS()
 	uploader := s3manager.NewUploader(session)
 	bucketName := os.Getenv("AWS_S3_BUCKET_NAME")

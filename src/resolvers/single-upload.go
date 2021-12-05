@@ -9,7 +9,7 @@ import (
 )
 
 func SingleUpload(ctx context.Context, file graphql.Upload) (*model.File, error) {
-	upload := utils.UploadFile(file.File, file.ContentType)
+	upload := utils.UploadFile(file.File)
 
 	return &model.File{
 		ID:          1,
