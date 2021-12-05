@@ -4,6 +4,7 @@ import (
 	"context"
 	"hello_world/src/graph/model"
 	"io/ioutil"
+	"strconv"
 )
 
 func SingleUploadWithPayload(ctx context.Context, req model.UploadFile) (*model.File, error) {
@@ -12,7 +13,7 @@ func SingleUploadWithPayload(ctx context.Context, req model.UploadFile) (*model.
 		return nil, err
 	}
 	return &model.File{
-		ID:          req.ID,
+		ID:          strconv.Itoa(req.ID),
 		Name:        req.File.Filename,
 		Content:     string(content),
 		ContentType: req.File.ContentType,

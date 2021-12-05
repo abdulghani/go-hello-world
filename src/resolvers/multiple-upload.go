@@ -5,6 +5,7 @@ import (
 	"errors"
 	"hello_world/src/graph/model"
 	"io/ioutil"
+	"strconv"
 
 	"github.com/99designs/gqlgen/graphql"
 )
@@ -20,7 +21,7 @@ func MultipleUpload(ctx context.Context, files []*graphql.Upload) ([]*model.File
 			return []*model.File{}, err
 		}
 		resp = append(resp, &model.File{
-			ID:          i + 1,
+			ID:          strconv.Itoa(i + 1),
 			Name:        files[i].Filename,
 			Content:     string(content),
 			ContentType: files[i].ContentType,

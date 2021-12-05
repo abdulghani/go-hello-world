@@ -22,7 +22,7 @@ input NewTodo {
 scalar Upload
 
 type File {
-    id: Int!
+    id: String!
     name: String!
     content: String!
     contentType: String!

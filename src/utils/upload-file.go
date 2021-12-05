@@ -11,11 +11,17 @@ import (
 
 const UPLOAD_PREFIX string = "APP_UPLOAD#"
 
-func UploadFile(file io.Reader) *s3manager.UploadOutput {
+type S3UploadResult struct {
+	Output *s3manager.UploadOutput
+	Key    string
+}
+
+func UploadFile(file io.Reader) *S3UploadResult {
 	session := ConnectAWS()
 	uploader := s3manager.NewUploader(session)
 	bucketName := os.Getenv("AWS_S3_BUCKET_NAME")
 	mtype, err := mimetype.DetectReader(file)
+	key := UPLOAD_PREFIX + CreateUlid() + mtype.Extension()
 
 	if err != nil {
 		panic(err)
@@ -24,7 +30,7 @@ func UploadFile(file io.Reader) *s3manager.UploadOutput {
 	upload, err := uploader.Upload(&s3manager.UploadInput{
 		Bucket:      aws.String(bucketName),
 		ACL:         aws.String("public-read"),
-		Key:         aws.String(UPLOAD_PREFIX + CreateUlid() + mtype.Extension()),
+		Key:         aws.String(key),
 		Body:        file,
 		ContentType: aws.String(mtype.String()),
 	})
@@ -33,5 +39,8 @@ func UploadFile(file io.Reader) *s3manager.UploadOutput {
 		panic(err)
 	}
 
-	return upload
+	return &S3UploadResult{
+		upload,
+		key,
+	}
 }

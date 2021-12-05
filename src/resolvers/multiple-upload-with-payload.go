@@ -5,6 +5,7 @@ import (
 	"errors"
 	"hello_world/src/graph/model"
 	"io/ioutil"
+	"strconv"
 )
 
 func MultipleUploadWithPayload(ctx context.Context, req []*model.UploadFile) ([]*model.File, error) {
@@ -18,7 +19,7 @@ func MultipleUploadWithPayload(ctx context.Context, req []*model.UploadFile) ([]
 			return []*model.File{}, err
 		}
 		resp = append(resp, &model.File{
-			ID:      i + 1,
+			ID:      strconv.Itoa(i + 1),
 			Name:    req[i].File.Filename,
 			Content: string(content),
 		})
