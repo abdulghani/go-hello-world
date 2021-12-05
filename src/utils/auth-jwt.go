@@ -8,43 +8,32 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-type jwtKey struct {
-	PublicKey  []byte
-	PrivateKey []byte
-}
+// STUPID KEY TURNS OUT TO BE THE SAME
+var auth_key []byte
 
-var keyFile jwtKey
-
-func getKeyFile() jwtKey {
-	if keyFile.PrivateKey != nil && keyFile.PublicKey != nil {
-		return keyFile
+func getAuthKey() []byte {
+	if auth_key != nil {
+		return auth_key
 	}
-	publicKeyPath := os.Getenv("JWT_PUBLIC_KEY_FILE")
-	privateKeyPath := os.Getenv("JWT_PRIVATE_KEY_FILE")
+	auth_key, err := ioutil.ReadFile(os.Getenv("JWT_KEY_FILE"))
+	ShouldPanic(err)
 
-	publicKeyFile, _ := ioutil.ReadFile(publicKeyPath)
-	privateKeyFile, _ := ioutil.ReadFile(privateKeyPath)
-
-	keyFile.PublicKey = publicKeyFile
-	keyFile.PrivateKey = privateKeyFile
-
-	return keyFile
+	return auth_key
 }
 
 func SignToken(payload interface{}) (string, error) {
-	key := getKeyFile()
+	key := getAuthKey()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS384, &jwt.StandardClaims{
 		ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
 		Id:        "abdul.ghani@kaisa.id",
 	})
 
-	return token.SignedString(key.PrivateKey)
+	return token.SignedString(key)
 }
 
 func VerifyToken(tokenstr string) (*jwt.Token, error) {
-	key := getKeyFile()
-
+	key := getAuthKey()
 	return jwt.ParseWithClaims(tokenstr, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return key.PublicKey, nil
+		return key, nil
 	})
 }

@@ -21,5 +21,8 @@ func GraphQL(c *gin.Context) {
 		MaxUploadSize: 100 * mb,
 	})
 
-	handler.ServeHTTP(c.Writer, c.Request)
+	// attach context to request
+	request := c.Request.WithContext(c)
+
+	handler.ServeHTTP(c.Writer, request)
 }

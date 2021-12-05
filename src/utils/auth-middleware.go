@@ -20,7 +20,9 @@ func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token, err := VerifyToken(getToken((c)))
 
-		Inspect("AUTH TOKEN", token, err)
+		if token != nil && err == nil {
+			c.Set("auth_token", token)
+		}
 
 		c.Next()
 	}

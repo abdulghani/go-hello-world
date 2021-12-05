@@ -21,7 +21,7 @@
     "vscode:settings": "[ ! -f ./.vscode/settings.json ] && cp ./.vscode/settings.example.json ./.vscode/settings.json",
     "openssl:generate-private-key": "openssl genrsa -out ./jwt_key.example 4096",
     "openssl:generate-public-key": "openssl rsa -in ./jwt_key.example -pubout -out ./jwt_key.example.pub",
-    "openssl:generate": "npm run openssl:generate-private-key && npm run openssl:generate-public-key"
+    "openssl:generate": "npm run openssl:generate-private-key"
   },
   "keywords": [],
   "author": "",

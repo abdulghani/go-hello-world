@@ -2,10 +2,16 @@ package utils
 
 import (
 	"fmt"
+
+	"github.com/fatih/color"
 )
 
 func Inspect(objects ...interface{}) {
-	for _, object := range objects {
-		fmt.Printf("%+v\n", object)
+	for i, object := range objects {
+		if i == 0 {
+			color.Green(fmt.Sprintf("%+v\n", object))
+		} else {
+			fmt.Printf("%+v\n", object)
+		}
 	}
 }
