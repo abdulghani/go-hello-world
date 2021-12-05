@@ -8,6 +8,7 @@ import (
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
+	InitMiddleware(router)
 
 	router.GET("/", handlers.Hello)
 	router.GET("/ping", handlers.Handler)

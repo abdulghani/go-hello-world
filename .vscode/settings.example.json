@@ -11,6 +11,8 @@
     "**/Thumbs.db": true,
     ".vscode": true,
     "tmp": true,
-    ".env.example": true
+    ".env.example": true,
+    ".air.toml": true,
+    "gqlgen.yml": true
   }
 }
