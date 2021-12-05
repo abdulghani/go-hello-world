@@ -1,4 +1,6 @@
-FROM golang:1.17-alpine
+##
+# BUILD
+FROM golang:1.17-buster AS build
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -10,9 +12,18 @@ RUN go mod download
 
 # Build files
 COPY ./src ./src
-RUN go build -o ./build/main ./src/main.go
-RUN rm -rf ./src
+RUN go build -o ./go_app_binary ./src/main.go
 
-# Expose port and entrypoint
+##
+# DEPLOY
+FROM gcr.io/distroless/base
+
+WORKDIR /usr/src/app
+
+# sometimes had problems with using relative . path
+COPY --from=build /usr/src/app/go_app_binary /usr/src/app/go_app_binary
+
 EXPOSE 3000
-CMD [ "./build/main" ]
+
+# same. had problems with relative . path
+ENTRYPOINT [ "/usr/src/app/go_app_binary" ]
