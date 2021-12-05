@@ -9,6 +9,7 @@ import (
 
 func main() {
 	utils.LoadEnv()
+	utils.ConnectAWS()
 	r := router.InitRouter()
 
 	r.Run(":" + utils.GetPort())
