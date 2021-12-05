@@ -22,6 +22,8 @@ WORKDIR /usr/src/app
 
 # sometimes had problems with using relative . path
 COPY --from=build /usr/src/app/go_app_binary ./
+COPY ./.env ./
+COPY ./jwt_key.example ./
 
 EXPOSE 3000
 

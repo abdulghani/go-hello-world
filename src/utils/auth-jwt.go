@@ -21,14 +21,17 @@ func getAuthKey() []byte {
 	return auth_key
 }
 
-func SignToken(payload interface{}) (string, error) {
+func SignToken(payload interface{}) string {
 	key := getAuthKey()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS384, &jwt.StandardClaims{
 		ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
 		Id:        "abdul.ghani@kaisa.id",
 	})
 
-	return token.SignedString(key)
+	tokenstr, err := token.SignedString(key)
+	ShouldPanic(err)
+
+	return tokenstr
 }
 
 func VerifyToken(tokenstr string) (*jwt.Token, error) {
