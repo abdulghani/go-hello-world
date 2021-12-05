@@ -13,6 +13,7 @@
     "tmp": true,
     ".env.example": true,
     ".air.toml": true,
-    "gqlgen.yml": true
+    "gqlgen.yml": true,
+    ".gitignore": true
   }
 }
