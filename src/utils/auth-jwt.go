@@ -24,8 +24,8 @@ func getAuthKey() []byte {
 func SignToken(payload interface{}) string {
 	key := getAuthKey()
 	token := jwt.NewWithClaims(jwt.SigningMethodHS384, &jwt.StandardClaims{
-		ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
-		Id:        "abdul.ghani@kaisa.id",
+		ExpiresAt: time.Now().UTC().Add(time.Hour * 72).Unix(),
+		Id:        "user@email.com",
 	})
 
 	tokenstr, err := token.SignedString(key)

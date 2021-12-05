@@ -9,6 +9,11 @@ import (
 )
 
 func SingleUpload(ctx context.Context, file graphql.Upload) (*model.File, error) {
+	authError := utils.ShouldAuth(ctx)
+	if authError != nil {
+		return nil, authError
+	}
+
 	upload := utils.UploadFile(file.File)
 
 	return &model.File{

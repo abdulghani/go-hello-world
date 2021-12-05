@@ -8,7 +8,7 @@ import (
 )
 
 func CreateUlid() string {
-	t := time.Now()
+	t := time.Now().UTC()
 	entropy := ulid.Monotonic(rand.New(rand.NewSource(t.UnixNano())), 0)
 	value := ulid.MustNew(ulid.Timestamp(t), entropy)
 
