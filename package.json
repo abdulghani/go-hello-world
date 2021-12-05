@@ -9,6 +9,7 @@
     "build": "rm -rf ./build; npm run graphql:generate && go build -o ./build/main ./src/main.go",
     "build:docker": "npm run docker:build",
     "docker:build": "docker build . -f ./dockerfile -t test/go_hello_world",
+    "docker:build-no-cache": "docker build . -f ./dockerfile -t test/go_hello_world --no-cache",
     "docker:save": "docker save -o ./docker_image.tar test/go_hello_world",
     "docker:scan": "docker scan test/go_hello_world",
     "env:copy": "[ ! -f ./.env ] && cp ./.env.example ./.env",

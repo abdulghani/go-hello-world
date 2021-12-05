@@ -12,18 +12,17 @@ RUN go mod download
 
 # Build files
 COPY ./src ./src
-RUN go build -o ./go_app_binary ./src/main.go
+RUN CGO_ENABLED=0 go build -o ./go_app_binary ./src/main.go
 
 ##
 # DEPLOY
-FROM gcr.io/distroless/base
+FROM gcr.io/distroless/static
 
 WORKDIR /usr/src/app
 
 # sometimes had problems with using relative . path
-COPY --from=build /usr/src/app/go_app_binary /usr/src/app/go_app_binary
+COPY --from=build /usr/src/app/go_app_binary ./
 
 EXPOSE 3000
 
-# same. had problems with relative . path
-ENTRYPOINT [ "/usr/src/app/go_app_binary" ]
+CMD [ "./go_app_binary" ]
