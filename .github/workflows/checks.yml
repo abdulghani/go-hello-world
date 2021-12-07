@@ -25,3 +25,26 @@ jobs:
       - name: build
         run: npm run build
 
+  deploy_staging:
+    needs: 
+      - install_dependencies
+    environment:
+      name: staging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          cache: 'npm'
+      - name: install dependencies
+        run: npm install
+      - name: build
+        run: npm run build
+
+
