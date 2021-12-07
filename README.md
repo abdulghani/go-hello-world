@@ -26,15 +26,13 @@ go version
 
 This project use npm to setup and run scripts, so you can do these commands
 
-- prepare env
+- install dependencies & setup env
 ```
-npm run prepare
-```
-- install dependencies
-```
-npm run postinstall
+npm install
 ```
 - run
 ```
 npm run start
 ```
+- (optional) setup `.env` file with key. provide it with needed credentials
+
