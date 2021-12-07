@@ -14,6 +14,7 @@
     ".env.example": true,
     ".air.toml": true,
     "gqlgen.yml": true,
-    ".gitignore": true
+    ".gitignore": true,
+    ".github": true
   }
 }

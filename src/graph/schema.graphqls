@@ -21,6 +21,7 @@ type Query {
     empty: String!
     accessToken: String!
     isTokenValid(token: String!): Boolean!
+    countries: String!
 }
 
 type Mutation {

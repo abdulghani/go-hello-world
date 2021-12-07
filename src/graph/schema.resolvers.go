@@ -32,6 +32,10 @@ func (r *queryResolver) IsTokenValid(ctx context.Context, token string) (bool, e
 	return resolvers.IsTokenValid(ctx, token)
 }
 
+func (r *queryResolver) Countries(ctx context.Context) (string, error) {
+	return resolvers.Countries(ctx)
+}
+
 // Mutation returns generated.MutationResolver implementation.
 func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
 
