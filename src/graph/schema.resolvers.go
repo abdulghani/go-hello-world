@@ -5,7 +5,6 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"hello_world/src/graph/generated"
 	"hello_world/src/graph/model"
 	"hello_world/src/resolvers"
@@ -13,24 +12,8 @@ import (
 	"github.com/99designs/gqlgen/graphql"
 )
 
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
 func (r *mutationResolver) SingleUpload(ctx context.Context, file graphql.Upload) (*model.File, error) {
 	return resolvers.SingleUpload(ctx, file)
-}
-
-func (r *mutationResolver) SingleUploadWithPayload(ctx context.Context, req model.UploadFile) (*model.File, error) {
-	return resolvers.SingleUploadWithPayload(ctx, req)
-}
-
-func (r *mutationResolver) MultipleUpload(ctx context.Context, files []*graphql.Upload) ([]*model.File, error) {
-	return resolvers.MultipleUpload(ctx, files)
-}
-
-func (r *mutationResolver) MultipleUploadWithPayload(ctx context.Context, req []*model.UploadFile) ([]*model.File, error) {
-	return resolvers.MultipleUploadWithPayload(ctx, req)
 }
 
 func (r *queryResolver) Hello(ctx context.Context) (string, error) {
@@ -38,11 +21,15 @@ func (r *queryResolver) Hello(ctx context.Context) (string, error) {
 }
 
 func (r *queryResolver) Empty(ctx context.Context) (string, error) {
-	panic(fmt.Errorf("not implemented"))
+	return "", nil
 }
 
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *queryResolver) AccessToken(ctx context.Context) (string, error) {
+	return resolvers.AccessToken(ctx)
+}
+
+func (r *queryResolver) IsTokenValid(ctx context.Context, token string) (bool, error) {
+	return resolvers.IsTokenValid(ctx, token)
 }
 
 // Mutation returns generated.MutationResolver implementation.
