@@ -46,6 +46,12 @@ jobs:
         run: npm install
       - name: build
         run: npm run build
+      - name: trigger azure pipeline
+        uses: Azure/pipelines@v1
+        with:
+          azure-devops-project-url: https://dev.azure.com/pawjourr/pawjourr
+          azure-pipeline-name: 'abdulghani.go-hello-world'
+          azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
   deploy_prod:
     needs: 
@@ -68,5 +74,11 @@ jobs:
         run: npm install
       - name: build
         run: npm run build
+      - name: trigger azure pipeline
+        uses: Azure/pipelines@v1
+        with:
+          azure-devops-project-url: https://dev.azure.com/pawjourr/pawjourr
+          azure-pipeline-name: 'abdulghani.go-hello-world'
+          azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
 
